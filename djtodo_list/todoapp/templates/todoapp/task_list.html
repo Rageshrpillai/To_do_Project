@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #d3d3d3;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-right: 55px;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            width: 300px;
+        }
+        
+        button {
+            padding: 5px 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            background: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        a {
+            color: red;
+            text-decoration: none;
+        }
+        
+    .main1{
+        display: flex;
+        justify-content: center;
+    }
+    form button{
+        border-radius: 10px;
+        width:65px;
+        box-shadow: 1px 1px 10px  black;
+        transition: .3s;
+        
+        
+
+    }
+    form input{
+        height: 35px;
+        box-shadow: 2px 3px 10px black;
+    }
+    form button:hover{
+        background-color: rgb(183, 204, 213);
+        
+    }
+    
+     
+
+
+
+    </style>
+</head>
+<body>
+
+ <div class="main1">
+   <div>
+    <h1>To-Do List</h1>
+    <form method="post" action="{% url 'add_task' %}">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Add a new task">
+        <button type="submit" class:"sub">Add</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }}
+                <a href="{% url 'delete_task' task.id %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+
+ </div>
+
+</body>
+</html>
